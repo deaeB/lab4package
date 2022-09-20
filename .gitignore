@@ -37,3 +37,6 @@ vignettes/*.pdf
 
 # R Environment Variables
 .Renviron
+
+# This will make git ignore the R project file - we do not want this on github.
+*.Rproj
