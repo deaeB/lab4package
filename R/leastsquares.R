@@ -3,7 +3,9 @@ testfunction <- function(formula, data){
   return(f)
 }
 
-
+t <- linreg$new(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)
+formula <- Petal.Length ~ Sepal.Width + Sepal.Length
+data <- iris
 
 leastsquares <- function(formula, data){
   X <- model.matrix(formula, data = data)
@@ -27,7 +29,7 @@ leastsquares <- function(formula, data){
   # The residual variance:
   var_beta_hat <- as.numeric(sigma_hat_sqr) * solve(t(X) %*% X)
   # The variance of the regression coefficients:
-  t_beta <- beta_hat / sqrt(var_beta_hat)
+  t_beta <- beta_hat / sqrt(diag(var_beta_hat))
   # The t-values for each coefficient:
   p_beta <- pt(beta_hat, df)
   # the p-values for each regression coefficient
