@@ -9,7 +9,9 @@
 #' 
 #' @return a RC object named linreg
 #' 
-#' @export
+#' @export linreg
+#' @exportClass linreg
+#' 
 #' @examples 
 #' data(iris)
 #' t <- linreg$new(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)
