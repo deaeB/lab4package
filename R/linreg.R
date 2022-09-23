@@ -1,10 +1,24 @@
 #' linreg
+#' 
+#' a package to handle linear regression models
+#' 
+#' RC class with methods for linear regression, using ordinary least squares
+#' 
+#' @param formula a formula object
+#' @param data the data.frame you want to handle
+#' 
+#' @return a RC object named linreg
+#' 
+#' @export
+#' @examples 
+#' data(iris)
+#' t <- linreg$new(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)
+#' t$print()
 #'
 #' @importFrom methods new
 #' @import ggplot2
 #' @import gridExtra
 #' @import devtools
-#' @export
 
 
 linreg <- setRefClass("linreg", 

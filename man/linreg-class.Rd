@@ -5,7 +5,24 @@
 \alias{linreg-class}
 \alias{linreg}
 \title{linreg}
+\arguments{
+\item{formula}{a formula object}
+
+\item{data}{the data.frame you want to handle}
+}
+\value{
+a RC object named linreg
+}
 \description{
-linreg
+a package to handle linear regression models
+}
+\details{
+RC class with methods for linear regression, using ordinary least squares
 }
 
+\examples{
+data(iris)
+t <- linreg$new(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)
+t$print()
+
+}
