@@ -9,7 +9,14 @@ Description: a package to handle linear regression models.
 License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.2.1
-Imports: ggplot2, gridExtra, methods
+Imports: 
+    ggplot2, 
+    gridExtra, 
+    methods, 
+    devtools
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr

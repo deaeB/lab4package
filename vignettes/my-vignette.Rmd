@@ -1,0 +1,71 @@
+---
+title: "my-vignette"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{my-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(lab4package)
+
+devtools::load_all(".")
+# This package gives you a RC class object linreg helping you to handle linear regression models
+
+t <- linreg$new(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)
+# input your formula and data for regression
+
+t$beta_hat
+# Regressions coefficients
+
+t$y_hat
+# The fitted values
+
+t$e_hat
+# The residuals
+
+# t$df
+# The degrees of freedom
+
+# t$sigma_hat_sqr
+# The residual variance
+
+# t$var_beta_hat
+# The variance of the regression coefficients
+
+# t$t_beta
+# The t-values for each coefficient
+
+# t$p_beta
+# The p-values for each coefficient
+
+## methods:
+
+t$print()
+# print out the coefficients and coefficient names
+
+t$plot()
+# plot Residuals vs Fitted & Scale−Location of iris lm(Petal.Length ~ Species)
+
+t$resid()
+# return the vector of residuals e^
+
+t$pred()
+# return the predicted values y^
+
+t$coef()
+# return the coefficients as a named vector
+
+t$summary()
+# return a  printout presenting the coefficients with their standard error,
+# t-value and p-value as well as the estimate of ^ σ and the degrees of freedom in the model
+
+```

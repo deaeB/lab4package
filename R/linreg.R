@@ -3,6 +3,7 @@
 #' @importFrom methods new
 #' @import ggplot2
 #' @import gridExtra
+#' @import devtools
 #' @export
 
 
