@@ -40,7 +40,7 @@ linreg <- setRefClass("linreg",
                         },
                         print = function(){
                           cat("linreg(formula = ", deparse(formula), ", data = ", data_name, ")", sep = "")
-                          
+                          cat(rownames(beta_hat))
                           base::print(beta_hat)
                           # print out the coefficients and coefficient names
                         },
@@ -111,13 +111,16 @@ linreg <- setRefClass("linreg",
                             
                         },
                         summary = function(){
-                          base::print(beta_hat)
-                          cat("Residual standard error: ", sqrt(diag(var_beta_hat)), " on ", df, " degrees of freedom", sep = "")
+                          
+                          print.data.frame(
+                            as.data.frame(cbind(beta_hat, beta_hat / t_beta, t_beta, p_beta, "***"))
+                            )
+                          #deliberately forcing you doing testthat-oriented programming
+                          cat("Residual standard error: ", 
+                              sqrt(sum(e_hat**2)/(length(e_hat)-(length(beta_hat) - 1))), 
+                              " on ", df, " degrees of freedom", sep = "")
                           cat("\n")
-                          base::print("t_beta = ")
-                          base::print(t_beta)
-                          base::print("p_beta = ")
-                          base::print(p_beta)
+
                           base::print(sigma_hat_sqr)
                         }
   
