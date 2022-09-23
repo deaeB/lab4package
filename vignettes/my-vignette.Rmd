@@ -20,6 +20,7 @@ library(lab4package)
 devtools::load_all(".")
 # This package gives you a RC class object linreg helping you to handle linear regression models
 
+data("iris")
 t <- linreg$new(formula = Petal.Length ~ Sepal.Width + Sepal.Length, data = iris)
 # input your formula and data for regression
 
