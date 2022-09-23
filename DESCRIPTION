@@ -9,7 +9,7 @@ Description: a package to handle linear regression models.
 License: GPL-3
 Encoding: UTF-8
 RoxygenNote: 7.2.1
-Import: ggplot2, gridExtra
+Imports: ggplot2, gridExtra, methods
 Suggests: 
     testthat (>= 3.0.0)
 Config/testthat/edition: 3

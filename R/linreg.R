@@ -1,3 +1,10 @@
+#' linreg
+#'
+#' @importFrom methods new
+#' @import ggplot2
+#' @import gridExtra
+#' @export
+
 
 linreg <- setRefClass("linreg", 
                       fields = list(formula = "formula", data = "data.frame", X = "array", y = "array",
@@ -86,7 +93,7 @@ linreg <- setRefClass("linreg",
                                                    v3 = pointlabel)
                           level_x2 <- as.numeric(levels(factor(data_plot2[, 1])))
                           median_y2 <- array()
-                          #mean actually, maybe replace it afterwards
+                          # mean actually, maybe replace it afterwards
                           j <- 1
                           for (i in level_x2) {
                             median_y2[j] <- mean(data_plot2[data_plot2[, 1] == i, 2])
@@ -104,7 +111,7 @@ linreg <- setRefClass("linreg",
                             theme(plot.title = element_text(hjust = .5),
                                   panel.grid = element_blank()
                                   ) +
-                            ggtitle("Scale−Location", subtitle = NULL ) 
+                            ggtitle("Scale-Location", subtitle = NULL ) 
 
                          
                           grid.arrange(p1, p2)
