@@ -44,9 +44,6 @@ linreg <- setRefClass("linreg",
                           base::print(beta_hat)
                           # print out the coefficients and coefficient names
                         },
-                        plot = function(){
-                          
-                        },
                         resid = function(){
                           return(as.vector(e_hat))
                         },
@@ -57,7 +54,6 @@ linreg <- setRefClass("linreg",
                           return(beta_hat)
                         },
                         plot = function(){
-                          data("iris")
                           pointlabel <- array(rep("", 150))
                           pointlabel[c(99, 118, 119)] <- c(99, 118, 119)
                           lmplot <- lm(formula = Petal.Length ~ Species, data = iris)
@@ -71,17 +67,47 @@ linreg <- setRefClass("linreg",
                             j <- j + 1
                           }
                           data_median <- as.data.frame(cbind(median_y, level_x))
-                          t1 <- ggplot(data_plot, aes(data_plot[, 1], data_plot[, 2])) +
+                          p1 <- ggplot(data_plot, aes(data_plot[, 1], data_plot[, 2])) +
                             geom_point( shape=1) +
                             geom_text(aes(label = data_plot[, 3]), nudge_x = -0.2) +
                             scale_y_continuous(limits = c(-1.5, 1.5), breaks = seq(-1.5, 1.5, 1)) +
                             geom_line(data = data_median, aes(level_x, median_y), colour = "red")+
                             xlab("Fitted values\nlm(Petal.Length ~ Species)") +
-                            ylab("Residuas") + 
-                            theme(plot.title = element_text(hjust = .5) ) +
+                            ylab("Residuals") +
+                            theme_bw() +
+                            theme(plot.title = element_text(hjust = .5),
+                                  panel.grid = element_blank()
+                                  ) +
                             ggtitle("Residuals vs Fitted", subtitle = NULL ) 
                           
-                          return(t1)
+                          data_plot2 <- data.frame(v1 = round(lmplot$fitted.values, digits = 5), 
+                                                   v2 = sqrt(abs(rstandard(lmplot))),
+                                                   #(t(e_hat) %*% e_hat) / df
+                                                   v3 = pointlabel)
+                          level_x2 <- as.numeric(levels(factor(data_plot2[, 1])))
+                          median_y2 <- array()
+                          #mean actually, maybe replace it afterwards
+                          j <- 1
+                          for (i in level_x2) {
+                            median_y2[j] <- mean(data_plot2[data_plot2[, 1] == i, 2])
+                            j <- j + 1
+                          }
+                          data_median2 <- as.data.frame(cbind(median_y2, level_x2))
+                          p2 <- ggplot(data_plot2, aes(data_plot2[, 1], data_plot2[, 2])) +
+                            geom_point( shape=1) +
+                            geom_text(aes(label = data_plot2[, 3]), nudge_x = -0.2) +
+                            scale_y_continuous(limits = c(0, 1.8), breaks = seq(0, 1.5, 0.5)) +
+                            geom_line(data = data_median2, aes(level_x2, median_y2), colour = "red")+
+                            xlab("Fitted values\nlm(Petal.Length ~ Species)") +
+                            ylab(expression(sqrt("Standardized residuals"))) + 
+                            theme_bw() +
+                            theme(plot.title = element_text(hjust = .5),
+                                  panel.grid = element_blank()
+                                  ) +
+                            ggtitle("Scale−Location", subtitle = NULL ) 
+
+                         
+                          grid.arrange(p1, p2)
                             
                         },
                         summary = function(){
